@@ -35,6 +35,10 @@ export class Dealer {
         }
     }
 
+    public allDealt() {
+        return this.deck.length === 0;
+    }
+
     /** Take all cards with static order */
     private _takeCards(): Array<Card> {
         let result = new Array<Card>();

@@ -20,8 +20,8 @@ export class Player {
         return this.hand;
     }
 
-    public receiveCard(cards: Array<Card>) {
-        cards.forEach(card => this.hand.push(card));
+    public giveCard(card: Card) {
+        this.hand.push(card);
     }
 
     public bestCombination() {}
