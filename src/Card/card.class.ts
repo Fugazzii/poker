@@ -1,15 +1,15 @@
-import { Pip, Suit } from ".";
+import { Rank, Suit } from ".";
 
 export class Card {
     public constructor(
         private readonly suit: Suit,
-        private readonly pip: Pip
+        private readonly rank: Rank
     ) {}
 
     public getCard() {
         return { 
             suit: this.suit,
-            pip: this.pip 
+            rank: this.rank 
         };
     }
 }

@@ -1,5 +1,5 @@
 import { Dealer } from '.';
-import { Suit, Pip } from '../Card';
+import { Suit, Rank } from '../Card';
 import { expect, describe, test, spyOn } from 'bun:test';
 
 // Mock Math.random to control shuffle duration
@@ -18,10 +18,10 @@ describe('Dealer', () => {
         const card = dealer.deal();
         expect(card).toBeDefined();
 
-        const { suit, pip } = card.getCard();
+        const { suit, rank } = card.getCard();
 
         expect(suit).toBe(Suit.SPADE);
-        expect(pip).toBe(Pip.ACE);
+        expect(rank).toBe(Rank.ACE);
     });
 
     test('should throw an error when dealing from an empty deck', () => {
