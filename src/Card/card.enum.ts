@@ -15,25 +15,9 @@ export enum Rank {
     EIGHT = 8,
     NINE = 9,
     TEN = 10,
-    JACK = "J",
-    QUEEN = "Q",
-    KING = "K",
-    ACE = "A"
+    JACK = 11,
+    QUEEN = 12,
+    KING = 13,
+    ACE = 14
 }
 
-export const suits: Array<Suit> = [Suit.DIAMOND, Suit.HEART, Suit.CLUB, Suit.SPADE];
-export const pips: Array<Rank> = [
-    Rank.TWO,
-    Rank.THREE,
-    Rank.FOUR,
-    Rank.FIVE,
-    Rank.SIX,
-    Rank.SEVEN,
-    Rank.EIGHT,
-    Rank.NINE,
-    Rank.TEN,
-    Rank.JACK,
-    Rank.QUEEN,
-    Rank.KING,
-    Rank.ACE
-];

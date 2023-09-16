@@ -18,7 +18,7 @@ describe('Dealer', () => {
         const card = dealer.deal();
         expect(card).toBeDefined();
 
-        const { suit, rank } = card.getCard();
+        const { suit, rank } = card;
 
         expect(suit).toBe(Suit.SPADE);
         expect(rank).toBe(Rank.ACE);

@@ -1,5 +1,5 @@
 import { Card } from "../Card";
-import { suits, pips } from "../Card";
+import { suits, ranks } from "../Card";
 
 export class Dealer {
     
@@ -39,8 +39,8 @@ export class Dealer {
     private _takeCards(): Array<Card> {
         let result = new Array<Card>();
         for(let suit of suits) {
-            for(let pip of pips) {
-                let card = new Card(suit, pip);
+            for(let rank of ranks) {
+                let card = new Card(suit, rank);
                 result.push(card);
             }
         }
