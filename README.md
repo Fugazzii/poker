@@ -1,4 +1,4 @@
-# poker
+# Poker
 
 To install dependencies:
 

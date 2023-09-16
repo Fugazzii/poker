@@ -1,8 +1,8 @@
 export enum Suit {
-    DIAMOND,
-    HEART,
-    CLUB,
-    SPADE
+    DIAMOND = "D",
+    HEART = "H",
+    CLUB = "C",
+    SPADE = "S"
 }
 
 export enum Pip {
