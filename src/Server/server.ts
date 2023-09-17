@@ -42,6 +42,13 @@ export class Server {
                     ws.send("Server is listening");
                 },
                 message(ws, message) {
+                    
+                    /**
+                     * TODO: We need to pass handle request based on `message` arg
+                     * TODO: `message` is supposed to be passed into `requestHandler` and return certain data
+                     * TODO: Messages can be `createBoard`, `addPlayer`, `/board/action/shuffle`
+                     */
+                    
                     ws.send(`Hey, I received message from client: ${message}`);
                     ws.send(`Sending message back to client: Pong!`);
                 },
