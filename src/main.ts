@@ -1,4 +1,4 @@
-import { ACTION } from "./Common";
+import { ACTION, SocketBody } from "./Common";
 import { Server } from "./Server";
 
 const server = new Server();
@@ -9,22 +9,28 @@ server.listen();
 const socket = new WebSocket("ws://localhost:3001/");
 
 socket.addEventListener("open", event => {
-    
-    const socketBody = {
+    create({        
         action: ACTION.NEW_PLAYER,
         args: {
             username: "ilia",
             money: 1000
         }
-    };
-    
-    const request = JSON.stringify(socketBody);
+    });
 
-    socket.send(request);
+    create({
+        action: ACTION.CREATE_BOARD,
+        args: {
+            admin: "ilia"
+        }
+    });
 });
 
 socket.addEventListener("message", event => {
     console.log(`Received from server: ${event.data}`);
 });
 
+function create(socketBody: SocketBody) {
+    const request = JSON.stringify(socketBody);
 
+    socket.send(request);
+}

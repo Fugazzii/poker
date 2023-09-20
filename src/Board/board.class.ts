@@ -1,4 +1,4 @@
-import { randomBytes } from "crypto";
+import { randomBytes, randomUUID } from "crypto";
 import { Card } from "../Card";
 import { Dealer } from "../Dealer";
 import { Player } from "../Player";
@@ -8,15 +8,19 @@ export class Board {
     public cardsOnBoard: Array<Card>;
     public players: Array<Player>;
     public dealer: Dealer;
-    public id: string;
+    public ID: string;
 
-    public constructor(
+    private constructor(
         private admin: Player
     ) {
-        this.id = randomBytes(6).toString();
+        this.ID = randomUUID();
         this.cardsOnBoard = new Array<Card>();
         this.players = new Array<Player>(this.admin);
         this.dealer = new Dealer();
+    }
+
+    public static createBoard(admin: Player) {
+        return new Board(admin);
     }
 
     public startGame() {

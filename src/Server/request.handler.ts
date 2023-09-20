@@ -2,6 +2,7 @@ import { log } from "console";
 import { ACTION, SocketBody } from "../Common";
 import { Board } from "../Board";
 import { Player } from "../Player";
+import { Server } from "http";
 
 export class RequestHandler {
     
@@ -16,12 +17,11 @@ export class RequestHandler {
         
         const { action, args } = socketBody;
 
-        const { username, money } = args;
-
-
         switch(action) {
             case ACTION.NEW_PLAYER:
 
+                const { username, money } = args;
+        
                 const newPlayer = Player.createPlayer(username, money);
 
                 players.set(newPlayer.getUsername(), newPlayer);
@@ -29,11 +29,19 @@ export class RequestHandler {
                 return `Player created: ${newPlayer.getUsername()}`;
             
             case ACTION.CREATE_BOARD: 
-                const board = new Board(socketBody.args.admin);
-                
-                console.log(`Creating board`);
 
-                return "board";
+                // Admin username
+                const { admin } = args;
+
+                // Player object from admin username
+                const adminPlayer = players.get(admin);
+
+                if(adminPlayer === undefined) throw new Error(`Player ${admin} does not exist`);
+
+                const board = Board.createBoard(adminPlayer);
+
+                return `Creating board ${board.ID}`;
+
             case ACTION.JOIN_BOARD:   return `Joining board`;
             case ACTION.LEAVE_BOARD:  return `Leaving board...`;
             default:
