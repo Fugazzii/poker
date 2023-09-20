@@ -23,6 +23,8 @@ export class Board {
 
     public startGame() {
         const game = new Game(this, this.dealer, this.players);
+
+        game.begin();
     }
 
     public static create(admin: Player) {
