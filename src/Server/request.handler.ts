@@ -53,9 +53,11 @@ export class RequestHandler {
                 board.join(playerToJoin);
                 
                 return `${playerUsername} joined room ${boardId}`;
-            case ACTION.LEAVE_BOARD:  return `Leaving board...`;
+                
+            case ACTION.LEAVE_BOARD: throw new Error("Unimplemented");
+            
             default:
-                return "default"
+                return "Invalid request"
         }
     }
 
