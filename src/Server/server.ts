@@ -1,5 +1,6 @@
 import { RequestHandler } from ".";
 import { Board } from "../Board";
+import { SocketBody } from "../Common";
 import { Player } from "../Player";
 
 /** Central Server */
@@ -22,11 +23,7 @@ export class Server {
                  * `this` keyword is complicated here because this refers to Bun.serve object instead of class
                 */
                 const success = server.upgrade(req, { 
-                    data: {
-                        pathname,
-                        boards: Server.boards,
-                        handler: Server.requestHandler
-                    }
+                    data: { pathname }
                 });
                 
                 if(!success) {
@@ -41,16 +38,19 @@ export class Server {
                 open(ws) {
                     ws.send("Server is listening");
                 },
-                message(ws, message) {
+                async message(ws, message: string) {
                     
                     /**
                      * TODO: We need to pass handle request based on `message` arg
                      * TODO: `message` is supposed to be passed into `requestHandler` and return certain data
                      * TODO: Messages can be `createBoard`, `addPlayer`, `/board/action/shuffle`
                      */
-                    
-                    ws.send(`Hey, I received message from client: ${message}`);
-                    ws.send(`Sending message back to client: Pong!`);
+
+                    const socketBody: SocketBody = await JSON.parse(message);
+
+                    const response = RequestHandler.handle(socketBody);
+
+                    ws.send(response);
                 },
                 close(ws) {
                     ws.send(`Server closed`);

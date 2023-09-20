@@ -1,0 +1,6 @@
+export enum ACTION {
+    CREATE_BOARD,
+    LEAVE_BOARD,
+    JOIN_BOARD,
+    NEW_PLAYER
+}
