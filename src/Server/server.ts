@@ -6,6 +6,7 @@ import { Player } from "../Player";
 /** Central Server */
 export class Server {
         
+    private static players = new Map<string, Player>();
     private static boards = new Map<string, Board>();
     private static requestHandler = new RequestHandler();
 
@@ -48,7 +49,7 @@ export class Server {
 
                     const socketBody: SocketBody = await JSON.parse(message);
 
-                    const response = RequestHandler.handle(socketBody);
+                    const response = RequestHandler.handle(socketBody, Server.players, Server.boards);
 
                     ws.send(response);
                 },

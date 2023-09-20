@@ -13,6 +13,7 @@ socket.addEventListener("open", event => {
     const socketBody = {
         action: ACTION.NEW_PLAYER,
         args: {
+            username: "ilia",
             money: 1000
         }
     };

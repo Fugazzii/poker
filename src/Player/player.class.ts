@@ -4,10 +4,15 @@ export class Player {
 
     private readonly hand: Array<Card>;
 
-    public constructor(
+    private constructor(
+        private username: string,
         private money: number
     ) {
         this.hand = new Array<Card>();
+    }
+
+    public static createPlayer(username: string, money: number) {
+        return new Player(username, money);
     }
 
     public bet(amount: number) {
@@ -25,4 +30,8 @@ export class Player {
     }
 
     public bestCombination() {}
+
+    public getUsername() {
+        return this.username;
+    }
 }
