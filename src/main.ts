@@ -23,6 +23,14 @@ socket.addEventListener("open", event => {
             admin: "ilia"
         }
     });
+
+    create({
+        action: ACTION.JOIN_BOARD,
+        args: {
+            playerUsername: "ilia",
+            boardId: "some_board_id"
+        }
+    })
 });
 
 socket.addEventListener("message", event => {

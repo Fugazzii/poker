@@ -1,5 +1,5 @@
 import { log } from "console";
-import { ACTION, SocketBody } from "../Common";
+import { ACTION, SocketBody, handleUndefined } from "../Common";
 import { Board } from "../Board";
 import { Player } from "../Player";
 import { Server } from "http";
@@ -36,13 +36,25 @@ export class RequestHandler {
                 // Player object from admin username
                 const adminPlayer = players.get(admin);
 
-                if(adminPlayer === undefined) throw new Error(`Player ${admin} does not exist`);
+                if(!adminPlayer) throw new Error(`Player ${admin} does not exist`);
 
-                const board = Board.createBoard(adminPlayer);
+                const newBoard = Board.createBoard(adminPlayer);
 
-                return `Creating board ${board.ID}`;
+                return `Creating board ${newBoard.ID}`;
 
-            case ACTION.JOIN_BOARD:   return `Joining board`;
+            case ACTION.JOIN_BOARD: 
+                
+                const { playerUsername, boardId } = args;
+                
+                const board = boards.get(boardId);                
+                if(!board) throw new Error(`${boardId} not found`);
+
+                const playerToJoin = players.get(playerUsername);
+                if(!playerToJoin) throw new Error(`${playerUsername} not found`);
+                
+                board.join(playerToJoin);
+                
+                return `${playerUsername} joined room ${boardId}`;
             case ACTION.LEAVE_BOARD:  return `Leaving board...`;
             default:
                 return "default"

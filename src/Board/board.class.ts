@@ -39,5 +39,4 @@ export class Board {
         this.players.push(newPlayer);
     }
 
-
 }
