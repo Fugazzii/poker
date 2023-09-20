@@ -3,7 +3,6 @@ import { Board } from "../Board";
 import { Player } from "../Player";
 
 export class RequestHandler {
-    
 
     public constructor() {}
 
@@ -36,7 +35,7 @@ export class RequestHandler {
 
                 if(!adminPlayer) throw new Error(`Player ${admin} does not exist`);
 
-                const newBoard = Board.createBoard(adminPlayer);
+                const newBoard = Board.create(adminPlayer);
 
                 return `Creating board ${newBoard.ID}`;
 

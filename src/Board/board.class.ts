@@ -2,37 +2,31 @@ import { randomBytes, randomUUID } from "crypto";
 import { Card } from "../Card";
 import { Dealer } from "../Dealer";
 import { Player } from "../Player";
+import { Game } from "../Game";
 
 export class Board {
 
-    public cardsOnBoard: Array<Card>;
-    public players: Array<Player>;
-    public dealer: Dealer;
     public ID: string;
 
+    private dealer: Dealer;
+    public cardsOnBoard: Array<Card>;
+    public players: Array<Player>;
+    
     private constructor(
         private admin: Player
     ) {
         this.ID = randomUUID();
+        this.dealer = Dealer.create();
         this.cardsOnBoard = new Array<Card>();
         this.players = new Array<Player>(this.admin);
-        this.dealer = new Dealer();
-    }
-
-    public static createBoard(admin: Player) {
-        return new Board(admin);
     }
 
     public startGame() {
-        this.dealer.shuffle();
+        const game = new Game(this, this.dealer, this.players);
+    }
 
-        let i = 0;
-        while(!this.dealer.allDealt()) {
-            const card = this.dealer.deal();
-            this.players[i].giveCard(card);
-
-            i === this.players.length - 1 ? i = 0 : i++;
-        }
+    public static create(admin: Player) {
+        return new Board(admin);
     }
 
     public join(newPlayer: Player) {

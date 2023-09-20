@@ -5,8 +5,12 @@ export class Dealer {
     
     private readonly deck: Array<Card>
 
-    public constructor() {
+    private constructor() {
         this.deck = this._takeCards();
+    }
+
+    public static create() {
+        return new Dealer();
     }
 
     /** Deal card from top of the deck */
