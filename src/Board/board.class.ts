@@ -8,10 +8,11 @@ export class Board {
 
     public ID: string;
 
+    private cardsOnBoard: Array<Card>;
+    private players: Array<Player>;
     private dealer: Dealer;
-    public cardsOnBoard: Array<Card>;
-    public players: Array<Player>;
-    
+    private moneyOnTheBoard: number;
+
     private constructor(
         private admin: Player
     ) {
@@ -19,6 +20,7 @@ export class Board {
         this.dealer = Dealer.create();
         this.cardsOnBoard = new Array<Card>();
         this.players = new Array<Player>(this.admin);
+        this.moneyOnTheBoard = 0;
     }
 
     public startGame() {
@@ -35,4 +37,10 @@ export class Board {
         this.players.push(newPlayer);
     }
 
+    public addMoney(money: number) {
+        this.moneyOnTheBoard += money;
+    }
+
+    public pickUpMoney() { this.moneyOnTheBoard = 0; }
+    public allMoney() { return this.moneyOnTheBoard; }
 }

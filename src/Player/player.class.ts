@@ -31,7 +31,10 @@ export class Player {
 
     public bestCombination() {}
 
-    public getUsername() {
-        return this.username;
+    public askForBet(): number {
+        return 0;
     }
+
+    public getUsername() { return this.username; }
+    public getMoney() { return this.money; }
 }
